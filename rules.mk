@@ -37,8 +37,8 @@ COMMAND_ENABLE = no
 CAPS_WORD_ENABLE = yes
 AUTO_SHIFT_ENABLE = yes
 
-# enable overriding shifted keys
-KEY_OVERRIDE_ENABLE = yes
+# enable Getreuer's custom shift keys
+SRC += features/custom_shift_keys.c
 
 # enable swap hands feature
 # SWAP_HANDS_ENABLE = yes
