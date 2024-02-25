@@ -3,6 +3,8 @@
 
 #pragma once
 
+// ---------- FIRMWARE CONFIG --------------------------------------------------
+/* matrix configuration */
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 5
 
@@ -20,41 +22,58 @@
     { GP8, GP9, GP16, NO_PIN, NO_PIN } \
 }
 
-
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
-
-/* Serial Config */
+/* serial config */
 #define USE_SERIAL
 #define SERIAL_USART_TX_PIN GP1
-#define MASTER_LEFT
 
-/* I2C Pin mapping */
+/* I2C pin mapping */
 //#define I2C1_SDA_PIN GP7
 //#define I2C1_SCL_PIN GP6
 //#define I2C1_CLOCK_SPEED 400000
 //#define I2C_DRIVER I2CD2
 
-// Set the mouse settings to a comfortable speed/accuracy trade-off,
-// assuming a screen refresh rate of 60 Htz or higher
-// The default is 50. This makes the mouse ~3 times faster and more accurate
-#define MOUSEKEY_INTERVAL 16
-// The default is 20. Since we made the mouse about 3 times faster with the previous setting,
-// give it more time to accelerate to max speed to retain precise control over short distances.
-#define MOUSEKEY_TIME_TO_MAX 40
-// The default is 300. Let's try and make this as low as possible while keeping the cursor responsive
-#define MOUSEKEY_DELAY 100
-// It makes sense to use the same delay for the mouseweel
-#define MOUSEKEY_WHEEL_DELAY 100
-// The default is 100
-#define MOUSEKEY_WHEEL_INTERVAL 50
-// The default is 40
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 100
-
-// Pick good defaults for enabling homerow modifiers
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
+/* auto detect split primary and handedness */
+#define SPLIT_USB_DETECT
 #define USB_VBUS_PIN 19
+#define EE_HANDS
+
+// NOTE:
+// for EE_HANDS to work automatically, run once from qmk root path:
+//   make dasbob:default:uf2-split-left
+//   make dasbob:default:uf2-split-right
+// or equivalently
+//   qmk flash -kb dasbob -km default -bl uf2-split-left
+//   qmk flash -kb dasbob -km default -bl uf2-split-right
+// afterwards and after setting some defaults
+//   qmk config user.keyboard=dasbob
+//   qmk config user.keymap=default
+// it's sufficient for either side to run a simple
+//   qmk flash
+
+// ---------- FEATURE SETTINGS -------------------------------------------------
+/* tap vs hold settings */
+#define TAPPING_TERM 200
+#undef PERMISSIVE_HOLD
+#undef PREVENT_STUCK_MODIFIERS
+
+/* autoshift settings */
+#define AUTO_SHIFT_TIMEOUT 150
+#define RETRO_SHIFT 500
+#define NO_AUTO_SHIFT_SPECIAL
+
+/* combo settings */
+#define COMBO_MUST_TAP_PER_COMBO
+
+/* caps word settings */
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+/* mouse key settings */
+#define MK_COMBINED  // like accelerated mode but enable constant speed keys
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_TIME_TO_MAX 40
+#define MOUSEKEY_MAX_SPEED 5
+
+// ---------- AUDIO CONFIG -----------------------------------------------------
 #define AUDIO_PWM_DRIVER PWMD2
 #define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_B
 #define AUDIO_STATE_TIMER GPTD4
@@ -65,5 +84,4 @@
     #define AUDIO_CLICKY_FREQ_RANDOMNESS 1.0f
     #define STARTUP_SONG SONG(STARTUP_SOUND)
 #endif
-
 #define STARTUP_SOUND E__NOTE(_E6), E__NOTE(_A6), ED_NOTE(_E7),
