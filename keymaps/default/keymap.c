@@ -186,3 +186,32 @@ const custom_shift_key_t custom_shift_keys[] = {
     {KC_PLUS, KC_EQL},
 };
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+
+// ---------- AUTO SHIFT -------------------------------------------------------
+// special keys (i.e. symbols) excluded via NO_AUTO_SHIFT_SPECIAL in config.h
+// tap-holds need to be added manually
+bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+    // catch-all tap-holds
+    if (IS_RETRO(keycode)) {
+        // NOTE:
+        // TH_TAB: <- don't enable. we want auto-S+TAB for inverse cycles
+        // swp(KC): <- not working. use SYM layer or REP key as workaround
+        switch (keycode) {
+            // skip auto-shift and allow double-tap-hold->repeat for tap-holds
+            case TH_ENT:
+            case TH_SPC:
+            case TH_BSP:
+                return false;
+            default:
+                return true;
+        }
+    } else {
+        switch (keycode) {
+            case KC_DOT:
+            case KC_COMM:
+                return true;
+            default:
+                return false;
+        }
+    }
+}

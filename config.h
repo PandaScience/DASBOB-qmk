@@ -57,11 +57,12 @@
 #undef PREVENT_STUCK_MODIFIERS
 
 /* autoshift settings */
-#define AUTO_SHIFT_TIMEOUT 150
-#define RETRO_SHIFT 500
-#define NO_AUTO_SHIFT_SPECIAL
+#define AUTO_SHIFT_TIMEOUT 150 // how long to hold before you get shifted state
+#define RETRO_SHIFT 500        // longer press will not result in tap on release for mod-taps
+#define NO_AUTO_SHIFT_SPECIAL  // basically exclude SYM layer
 
 /* combo settings */
+#define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_MUST_TAP_PER_COMBO
 
 /* caps word settings */
