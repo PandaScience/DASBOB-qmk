@@ -44,4 +44,4 @@ SRC += features/custom_shift_keys.c
 SWAP_HANDS_ENABLE = yes
 
 # enable key combos
-# COMBO_ENABLE = yes
+COMBO_ENABLE = yes

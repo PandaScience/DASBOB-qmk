@@ -232,3 +232,24 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
         }
     }
 }
+
+// ---------- KEY COMBOS -------------------------------------------------------
+// software reboot
+const uint16_t PROGMEM reset_left_combo[] = {_U, _O, _Q, COMBO_END};
+const uint16_t PROGMEM reset_right_combo[] = {_V, _M, _L, COMBO_END};
+// escape
+const uint16_t PROGMEM esc_left_combo[] = {HM_R, _Y, COMBO_END};
+const uint16_t PROGMEM esc_right_combo[] = {_F, HM_E, COMBO_END};
+// symbols
+const uint16_t PROGMEM bsls_combo[] = {HM_A, HM_I, COMBO_END};
+
+combo_t key_combos[] = {
+    // software reboot
+    COMBO(reset_left_combo, QK_BOOT),
+    COMBO(reset_right_combo, QK_BOOT),
+    // escape
+    COMBO(esc_left_combo, _ESC),
+    COMBO(esc_right_combo, _ESC),
+    // symbols
+    COMBO(bsls_combo, KC_BSLS),  // nvim leader
+};
