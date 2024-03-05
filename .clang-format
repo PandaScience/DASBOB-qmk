@@ -1,0 +1,12 @@
+BasedOnStyle: LLVM
+UseTab: Never
+ColumnLimit: 100
+IndentWidth: 4
+IndentCaseLabels: true
+SpacesBeforeTrailingComments: 2
+AllowShortBlocksOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+# AllowShortCaseLabelsOnASingleLine: true # don't use, will enforce single lines!
+BraceWrapping:
+  AfterEnum: true
