@@ -1,0 +1,20 @@
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+# https://github.com/jdx/mise/issues/1580
+# https://github.com/mise-plugins/mise-poetry/issues/8
+# https://github.com/jdx/mise/issues/323
+# NOTE: unless maintainer has decided on following issues pip packages need
+#       to be installed manually: `pip install --upgrade keymap-drawer`
+
+# run with: mise watch -t draw_keymap
+[tasks.draw_keymap]
+description = "Draws a SVG image with nice glyphs based on keymap.c"
+run = "./draw_keymap.sh"
+sources = [
+	"macros.h",
+	"**/keymap.c",
+	"keymap-drawer/base.yaml",
+	"keymap-drawer/combos.yaml",
+	"keymap-drawer/overrides.yaml",
+]

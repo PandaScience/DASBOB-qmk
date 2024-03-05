@@ -1,0 +1,46 @@
+# https://github.com/caksoylar/keymap-drawer/blob/main/KEYMAP_SPEC.md#combos
+combos:
+  # reboot
+  # - { l: [BSE], p: [0, 1, 2], k: $$mdi:restart$$, a: top }
+  - { l: [BSE], p: [7, 8, 9], k: $$mdi:restart$$, a: top }
+  # ESC
+  - {
+      l: [BSE],
+      p: [12, 14],
+      k: $$mdi:close-box$$,
+      a: top,
+      o: +1.1,
+      arc_scale: 0.7,
+    }
+  - {
+      l: [BSE],
+      p: [15, 17],
+      k: $$mdi:close-box$$,
+      a: top,
+      o: +1.1,
+      arc_scale: 0.7,
+    }
+  # symbols top left row
+  - { l: [BSE], p: [0, 10], k: "~" }
+  - { l: [BSE], p: [1, 11], k: "!" }
+  - { l: [BSE], p: [2, 12], k: "@" }
+  - { l: [BSE], p: [3, 13], k: "#" }
+  - { l: [BSE], p: [4, 14], k: "$" }
+  # symbols bottom left row
+  - { l: [BSE], p: [10, 20], k: "%", s: 0.2 }
+  - { l: [BSE], p: [11, 21], k: "^", s: 0.2 }
+  - { l: [BSE], p: [12, 22], k: "&", s: 0.2 }
+  - { l: [BSE], p: [13, 23], k: "*", s: 0.2 }
+  - { l: [BSE], p: [14, 24], k: "`", s: 0.0 }
+  # symbols top rigth row
+  - { l: [BSE], p: [5, 15], k: "_" }
+  - { l: [BSE], p: [6, 16], k: "-" }
+  - { l: [BSE], p: [7, 17], k: "+" }
+  - { l: [BSE], p: [8, 18], k: "=" }
+  # symbols bottom rigth row
+  - { l: [BSE], p: [15, 25], k: "|", s: 0.0 }
+  - { l: [BSE], p: [16, 26], k: "'", s: 0.2 }
+  - { l: [BSE], p: [16, 26], k: "'", s: 0.2 }
+  - { l: [BSE], p: [17, 27], k: ";", s: 0.2 }
+  - { l: [BSE], p: [18, 28], k: ":", s: 0.2 }
+  - { l: [BSE], p: [19, 29], k: "\\", s: 0.2 }

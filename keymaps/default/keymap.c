@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
-#include "features/custom_shift_keys.h"
-#include "macros.h"
+#include "../../features/custom_shift_keys.h"
+#include "../../macros.h"
 
 #define ___x___ KC_NO
 #define ___O___ KC_NO

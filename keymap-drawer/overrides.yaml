@@ -1,0 +1,351 @@
+# https://github.com/caksoylar/keymap-drawer/blob/main/CONFIGURATION.md
+# https://pictogrammers.com/library/mdi/
+draw_config:
+  n_columns: 1
+  # key dimensions, non-ortho layouts use key_h for width as well
+  # key_w: 100 # This doesn't seem to do anything? 🤔
+  key_h: 80
+
+  # keys border radius
+  key_rx: 4
+  key_ry: 4
+
+  # key labels line spacing for multi-line labels
+  line_spacing: 1
+
+  # combo box dimensions
+  combo_w: 25
+  combo_h: 25
+
+  # padding from the edge of cap to top and bottom legends
+  small_pad: 4
+
+  # Padding between keys
+  inner_pad_w: 1.5
+  inner_pad_h: 1.5
+
+  # padding between layers
+  outer_pad_w: 5
+  outer_pad_h: 15
+
+  # gap between two halves for ortho layout generator
+  # split_gap: 20 # This doesn't seem to have any effect either? 🤔
+
+  # as it reads on the tin can, this comment is here for consistency
+  append_colon_to_layer_header: false
+
+  # shrink font size for legends wider than this many chars, set to 0 to disable
+  # ideal value depends on the font size defined in svg_style and width of the boxes
+  shrink_wide_legends: 5
+
+  # Glyphs dimensions
+  glyph_tap_size: 26
+  glyph_hold_size: 18
+  glyph_shifted_size: 18
+
+  svg_extra_style: |
+    /* ---------- Font and Color -------------------------------------------- */
+    /* https://materialui.co/colors */
+
+    svg.keymap {
+        /* color variables */
+        --color--material--blue-gray--50: rgb(236, 239, 241);
+        --color--material--blue-gray--100: rgb(207, 216, 220);
+        --color--material--blue-gray--200: rgb(176, 190, 197);
+        --color--material--blue-gray--300: rgb(144, 164, 174);
+        --color--material--blue-gray--400: rgb(120, 144, 156);
+        --color--material--blue-gray--500: rgb(96, 125, 139);
+        --color--material--blue-gray--600: rgb(84, 110, 122);
+        --color--material--blue-gray--700: rgb(69, 90, 100);
+        --color--material--blue-gray--800: rgb(55, 71, 79);
+        --color--material--blue-gray--900: rgb(38, 50, 56);
+
+        --color--material--blue--50: rgb(227, 242, 253);
+        --color--material--blue--100: rgb(187, 222, 251);
+
+        --color--material--indigo--50: rgb(232,234,246);
+        --color--material--indigo--100: rgb(197,202,233);
+
+        --color--material--red--50: rgb(255, 235, 238);
+        --color--material--red--100: rgb(255, 205, 210);
+        --color--material--red--200: rgb(239, 154, 154);
+        --color--material--red--300: rgb(229, 115, 115);
+
+        --color--material--teal--50: rgb(224, 242, 241);
+        --color--material--teal--100: rgb(178, 223, 219);
+
+        --color--material--yellow--50: rgb(255, 253, 231);
+        --color--material--yellow--100: rgb(255, 249, 196);
+
+        --color--light-gray: rgb(243, 246, 247);
+
+        --color--bg: transparent;
+        --color--text: var(--color--material--blue-gray--900);
+
+        --color--layer--text: var(--color--material--blue-gray--400);
+
+        --color--key--bg: var(--color--material--blue-gray--50);
+        --color--key--border: white;
+        --color--key--text--tap: var(--color--text);
+        --color--key--text--shifted: var(--color--material--blue-gray--500);
+        --color--key--text--hold: var(--color--material--blue-gray--500);
+
+        --color--combo--bg: var(--color--material--blue-gray--100);
+        --color--combo--border: var(--color--combo--bg);
+        --color--combo--dendron: var(--color--material--blue-gray--200);
+        --color--combo--text--tap: var(--color--material--blue-gray--800);
+        --color--combo--text--shifted: var(--color--material--blue-gray--400);
+        --color--combo--text--hold: var(--color--combo--text--tap);
+
+        --color--none--bg: var(--color--light-gray);
+        --color--none--border: var(--color--light-gray);
+
+        /* font settings */
+        font-family: Liberation Mono;
+        font-size: 24px;
+        font-kerning: normal;
+        text-rendering: optimizeLegibility;
+        fill: var(--color--text);
+        background-color: var(--color--bg);
+        background-image: var(--logo-path);
+        background-repeat: no-repeat;
+        background-position: var(--logo-position);
+        background-size: var(--logo-size) auto;
+    }
+
+
+    /* ---------- Key Settings ---------------------------------------------- */
+    /* NOTE: blindly copied that part from caksoylar/keymap-drawer */
+    rect,
+    path {
+      shape-rendering: geometricPrecision;
+    }
+
+    text {
+        text-anchor: middle;
+        dominant-baseline: middle;
+        line-height: 1;
+    }
+
+    /* Layer labels */
+    text.label {
+        font-weight: bold;
+        text-anchor: start;
+        paint-order: stroke;
+        fill: var(--color--layer--text);
+        dominant-baseline: text-before-edge;
+    }
+
+
+    /* Keys */
+    rect.key,
+    rect.combo {
+        fill: var(--color--key--bg);
+        stroke: var(--color--key--border);
+    }
+    .tap {
+        fill: var(--color--key--text--tap);
+    }
+    .shifted,
+    .hold {
+        font-size: 18px;
+        text-anchor: middle;
+    }
+    .shifted {
+        dominant-baseline: hanging;
+        fill: var(--color--key--text--shifted);
+        translate: -25px 2px;
+    }
+    .hold {
+        dominant-baseline: ideographic;
+        fill: var(--color--key--text--hold);
+    }
+
+    /* Combos */
+    .combo {
+        --color--key--bg: var(--color--combo--bg);
+        --color--key--border: var(--color--combo--border);
+        --color--key--text--tap: var(--color--combo--text--tap);
+        --color--key--text--shifted: var(--color--combo--text--shifted);
+        --color--key--text--hold: var(--color--combo--text--hold);
+    }
+    rect.combo {
+        stroke-width: 0;
+    }
+    path.combo {
+        stroke-width: 3;
+        stroke: var(--color--combo--dendron);
+        stroke-dasharray: 6, 6;
+        fill: none;
+    }
+    .combo.tap {
+        font-size: 16px;
+    }
+    .combo.shifted {
+        font-size: 13px;
+        translate: -9px -2px;
+    }
+    .combo.hold {
+        font-size: 16px;
+        /* translate: 2px 0px; */
+    }
+
+
+    /* ---------- Coloring Special Keys ------------------------------------- */
+
+    /* key types from base.yaml */
+    .held {
+        --color--key--bg: var(--color--material--red--300);
+        --color--key--border: var(--color--material--red--200);
+        opacity: 0.8 !important;
+    }
+    .none {
+        --color--key--bg: var(--color--none--bg);
+        --color--key--border: var(--color--none--border);
+        --color--key--text--tap: var(--color--none--text--tap);
+        --color--key--text--shifted: var(--color--none--text--shifted);
+        --color--key--text--hold: var(--color--none--text--hold);
+        opacity: 0.8;
+    }
+
+    /* unassigned keys */
+    g.key:not(:has(> :is(text,use ))) {
+        opacity: 0.6;
+    }
+
+    /* thumb keys */
+    .keypos-30,
+    .keypos-31,
+    .keypos-32,
+    .keypos-33,
+    .keypos-34,
+    .keypos-35 {
+        --color--key--bg: var(--color--material--blue-gray--100);
+        --color--key--border: var(--color--material--blue-gray--50);
+    }
+
+    /* pure mods */
+    .key:has(> .mdi\:gesture-tap-hold) {
+        --color--key--bg: var(--color--material--teal--100);
+        --color--key--border: var(--color--material--teal--50);
+    }
+
+    /* mod tap-holds */
+    .key:has(> .hold.mdi\:apple-keyboard-control),
+    .key:has(> .hold.mdi\:apple-keyboard-shift),
+    .key:has(> .hold.mdi\:apple-keyboard-option),
+    .key:has(> .hold.mdi\:apple-keyboard-command),
+    .key:has(> .hold.mdi\:chevron-double-up),
+    .key:has(> .hold.mdi\:chevron-up-box-outline),
+    .key:has(> .hold.mdi\:earth) {
+        --color--key--bg: var(--color--material--blue--100);
+        --color--key--border: var(--color--material--blue--50);
+    }
+
+    /* layer tap-holds: SYM, NUM, MSE, NAV, FUN, SWP */
+    .key:has(> .hold.mdi\:pound-box),
+    .key:has(> .hold.mdi\:numeric),
+    .key:has(> .hold.mdi\:mouse),
+    .key:has(> .hold.mdi\:arrow-all),
+    .key:has(> .hold.mdi\:layers),
+    .key:has(> .hold.mdi\:swap-horizontal) {
+        --color--key--bg: var(--color--material--yellow--100);
+        --color--key--border: var(--color--material--yellow--50);
+    }
+
+    /* repeat keys */
+    .key:has(> .mdi\:repeat-variant),
+    .key:has(> .mdi\:star) {
+        --color--key--bg: var(--color--material--indigo--100);
+        --color--key--border: var(--color--material--indigo--50);
+    }
+
+parse_config:
+  raw_binding_map:
+    # waiting for https://github.com/caksoylar/keymap-drawer/issues/9
+    LSFT_T(KC_T): { t: T, h: $$mdi:apple-keyboard-shift$$ }
+    RSFT_T(KC_A): { t: A, h: $$mdi:apple-keyboard-shift$$ }
+    LCTL_T(KC_X): { t: X, h: $$mdi:apple-keyboard-control$$ }
+    RCTL_T(KC_SLSH): { t: /, h: $$mdi:apple-keyboard-control$$ }
+    LGUI_T(KC_R): { t: R, h: $$mdi:apple-keyboard-command$$ }
+    RGUI_T(KC_E): { t: E, h: $$mdi:apple-keyboard-command$$ }
+    LALT_T(KC_K): { t: K, h: $$mdi:apple-keyboard-option$$ }
+    LALT_T(KC_DOT): { t: ., s: ">", h: $$mdi:apple-keyboard-option$$ }
+    ALGR_T(KC_TAB): { t: $$mdi:keyboard-tab$$, h: $$mdi:earth$$ }
+    ALGR_T(KC_BSPC):
+      t: $$mdi:backspace-outline$$,
+      s: $$mdi:backspace-reverse$$,
+      h: $$mdi:earth$$,
+    # RCS_T(KC_SLSH): { t: /, h: $$mdi:chevron-double-up$$, s: "?" }
+    # RCS_T(KC_X): { t: X, h: $$mdi:chevron-double-up$$ }
+    # LSG_T(KC_J): { t: J, h: $$mdi:chevron-up-box-outline$$ }
+    # LSG_T(KC_COMM): { t: ",", h: $$mdi:chevron-up-box-outline$$, s: "<" }
+    QK_REP: $$mdi:repeat-variant$$
+    QK_AREP: $$mdi:star$$
+    SH_T(KC_SPC): { t: $$mdi:keyboard-space$$, h: $$mdi:swap-horizontal$$ }
+
+  qmk_keycode_map:
+    # currently not properly parsable
+    #> layer toggles -> enums are not pre-processed by cpp for some reason
+    MO(FUN): { t: $$mdi:function$$, h: $$mdi:layers$$ }
+    LT(SYM, S): { t: S, h: $$mdi:pound-box$$ }
+    LT(SYM, I): { t: I, h: $$mdi:pound-box$$ }
+    LT(NAV, D): { t: D, h: $$mdi:arrow-all$$ }
+    LT(MSE, N): { t: N, h: $$mdi:mouse$$ }
+    LT(NUM, ENT): { t: $$mdi:keyboard-return$$, h: $$mdi:numeric$$ }
+
+    # modifiers
+    LSFT: { t: $$mdi:apple-keyboard-shift$$, h: $$mdi:gesture-tap-hold$$ }
+    LCTL: { t: $$mdi:apple-keyboard-control$$, h: $$mdi:gesture-tap-hold$$ }
+    LALT: { t: $$mdi:apple-keyboard-option$$, h: $$mdi:gesture-tap-hold$$ }
+    LGUI: { t: $$mdi:apple-keyboard-command$$, h: $$mdi:gesture-tap-hold$$ }
+    # S(LCTL): { t: $$mdi:chevron-double-up$$, h: $$mdi:gesture-tap-hold$$ }
+    # S(LGUI): { t: $$mdi:chevron-up-box-outline$$, h: $$mdi:gesture-tap-hold$$ }
+    # MEH: $$mdi:star-three-points$$ # "meh"
+
+    # navigation
+    UP: { t: $$mdi:arrow-up-bold$$, s: $$mdi:arrow-expand-up$$ }
+    DOWN: { t: $$mdi:arrow-down-bold$$, s: $$mdi:arrow-expand-down$$ }
+    LEFT: { t: $$mdi:arrow-left-bold$$, s: $$mdi:arrow-collapse-left$$ }
+    RGHT: { t: $$mdi:arrow-right-bold$$, s: $$mdi:arrow-collapse-right$$ }
+    # PGUP: $$mdi:arrow-expand-up$$
+    # PGDN: $$mdi:arrow-expand-down$$
+    # HOME: $$mdi:arrow-collapse-left$$
+    # END: $$mdi:arrow-collapse-right$$
+    PSTE: $$mdi:content-paste$$
+    COPY: $$mdi:content-copy$$
+    CUT: $$mdi:content-cut$$
+    INS: $$mdi:hand-pointing-down$$
+
+    # audio
+    MPRV: $$mdi:skip-previous$$
+    MNXT: $$mdi:skip-next$$
+    MPLY: $$mdi:play-pause$$
+    MUTE: $$mdi:volume-mute$$
+    VOLU: $$mdi:volume-high$$
+    VOLD: $$mdi:volume-medium$$
+
+    # mouse
+    BTN1: { t: ➀, h: $$mdi:cursor-default-click$$ }
+    BTN2: { t: ➁, h: $$mdi:cursor-default-click$$ }
+    BTN3: { t: ➂, h: $$mdi:cursor-default-click$$ }
+    BTN4: { t: ➃, h: $$mdi:cursor-default-click$$ }
+    BTN5: { t: ➄, h: $$mdi:cursor-default-click$$ }
+    MS_U: { t: $$mdi:arrow-up$$, h: $$mdi:mouse-outline$$ }
+    MS_D: { t: $$mdi:arrow-down$$, h: $$mdi:mouse-outline$$ }
+    MS_L: { t: $$mdi:arrow-left$$, h: $$mdi:mouse-outline$$ }
+    MS_R: { t: $$mdi:arrow-right$$, h: $$mdi:mouse-outline$$ }
+    WH_U: ⚙↑
+    WH_D: ⚙↓
+    ACL0: { t: $$mdi:plus$$, h: $$mdi:speedometer$$ }
+    ACL1: { t: $$mdi:plus-thick$$, h: $$mdi:speedometer$$ }
+    ACL2: { t: $$mdi:plus-circle$$, h: $$mdi:speedometer$$ }
+
+    # misc
+    COMM: { t: ",", s: "<" }
+    DOT: { t: ".", s: ">" }
+    ENT: $$mdi:keyboard-return$$
+    TAB: $$mdi:keyboard-tab$$
+    SPC: $$mdi:keyboard-space$$
+    LXHM: ~/
+    UPDIR: ../
