@@ -302,7 +302,18 @@ const uint16_t PROGMEM reset_right_combo[] = {_V, _M, _L, COMBO_END};
 // escape
 const uint16_t PROGMEM esc_left_combo[] = {HM_R, _Y, COMBO_END};
 const uint16_t PROGMEM esc_right_combo[] = {_F, HM_E, COMBO_END};
-// symbols
+// symbols left side
+const uint16_t PROGMEM sym_tild_combo[] = {_V, HM_S, COMBO_END};
+const uint16_t PROGMEM sym_exlm_combo[] = {_M, HM_T, COMBO_END};
+const uint16_t PROGMEM sym_at_combo[] = {_L, HM_R, COMBO_END};
+const uint16_t PROGMEM sym_hash_combo[] = {_C, HM_D, COMBO_END};
+const uint16_t PROGMEM sym_dlr_combo[] = {_P, _Y, COMBO_END};
+const uint16_t PROGMEM sym_perc_combo[] = {HM_S, HM_X, COMBO_END};
+const uint16_t PROGMEM sym_circ_combo[] = {HM_T, HM_K, COMBO_END};
+const uint16_t PROGMEM sym_ampr_combo[] = {HM_R, _J, COMBO_END};
+const uint16_t PROGMEM sym_astr_combo[] = {HM_D, _G, COMBO_END};
+const uint16_t PROGMEM sym_grv_combo[] = {_Y, _W, COMBO_END};
+// symbols right side
 const uint16_t PROGMEM bsls_combo[] = {HM_A, HM_I, COMBO_END};
 
 combo_t key_combos[] = {
@@ -312,7 +323,18 @@ combo_t key_combos[] = {
     // escape
     COMBO(esc_left_combo, _ESC),
     COMBO(esc_right_combo, _ESC),
-    // symbols
+    // symbols left side
+    COMBO(sym_tild_combo, KC_TILD),
+    COMBO(sym_exlm_combo, KC_EXLM),
+    COMBO(sym_at_combo, KC_AT),
+    COMBO(sym_hash_combo, KC_HASH),
+    COMBO(sym_dlr_combo, KC_DLR),
+    COMBO(sym_perc_combo, KC_PERC),
+    COMBO(sym_circ_combo, KC_CIRC),
+    COMBO(sym_ampr_combo, KC_AMPR),
+    COMBO(sym_astr_combo, KC_ASTR),
+    COMBO(sym_grv_combo, KC_GRV),
+    // symbols right side
     COMBO(bsls_combo, KC_BSLS),  // nvim leader
 };
 
