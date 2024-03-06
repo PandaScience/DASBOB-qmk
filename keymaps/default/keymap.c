@@ -314,7 +314,15 @@ const uint16_t PROGMEM sym_ampr_combo[] = {HM_R, _J, COMBO_END};
 const uint16_t PROGMEM sym_astr_combo[] = {HM_D, _G, COMBO_END};
 const uint16_t PROGMEM sym_grv_combo[] = {_Y, _W, COMBO_END};
 // symbols right side
-const uint16_t PROGMEM bsls_combo[] = {HM_A, HM_I, COMBO_END};
+const uint16_t PROGMEM sym_unds_combo[] = {_B, _F, COMBO_END};
+const uint16_t PROGMEM sym_mins_combo[] = {_AREP, HM_N, COMBO_END};
+const uint16_t PROGMEM sym_plus_combo[] = {_U, HM_E, COMBO_END};
+const uint16_t PROGMEM sym_eql_combo[] = {_O, HM_A, COMBO_END};
+const uint16_t PROGMEM sym_pipe_combo[] = {_F, _Z, COMBO_END};
+const uint16_t PROGMEM sym_quot_combo[] = {HM_N, _H, COMBO_END};
+const uint16_t PROGMEM sym_scln_combo[] = {HM_E, _COMM, COMBO_END};
+const uint16_t PROGMEM sym_coln_combo[] = {HM_A, HM_DT, COMBO_END};
+const uint16_t PROGMEM sym_bsls_combo[] = {HM_I, HM_SL, COMBO_END};
 
 combo_t key_combos[] = {
     // software reboot
@@ -335,7 +343,15 @@ combo_t key_combos[] = {
     COMBO(sym_astr_combo, KC_ASTR),
     COMBO(sym_grv_combo, KC_GRV),
     // symbols right side
-    COMBO(bsls_combo, KC_BSLS),  // nvim leader
+    COMBO(sym_unds_combo, KC_UNDS),
+    COMBO(sym_mins_combo, KC_MINS),
+    COMBO(sym_plus_combo, KC_PLUS),
+    COMBO(sym_eql_combo, KC_EQL),
+    COMBO(sym_pipe_combo, KC_PIPE),
+    COMBO(sym_quot_combo, KC_QUOT),
+    COMBO(sym_coln_combo, KC_COLN),
+    COMBO(sym_scln_combo, KC_SCLN),
+    COMBO(sym_bsls_combo, KC_BSLS),
 };
 
 // ---------- (ALTERNATE) REPEATS ----------------------------------------------
