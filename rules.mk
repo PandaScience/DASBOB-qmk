@@ -41,7 +41,7 @@ AUTO_SHIFT_ENABLE = yes
 SRC += features/custom_shift_keys.c
 
 # enable swap hands feature
-# SWAP_HANDS_ENABLE = yes
+SWAP_HANDS_ENABLE = yes
 
 # enable key combos
 # COMBO_ENABLE = yes

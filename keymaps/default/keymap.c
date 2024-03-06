@@ -14,6 +14,7 @@
 #define num(KC) LT(NUM, KC)
 #define nav(KC) LT(NAV, KC)
 #define mse(KC) LT(MSE, KC)
+#define swp(KC) SH_T(KC)  // NOTE: breaks double-tap-repeat!
 
 // home row mods left
 #define HM_S sym(_S)
@@ -148,6 +149,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 /* clang-format on */
+
+// ---------- SWAP HANDS MATRIX ------------------------------------------------
+#ifdef SWAP_HANDS_ENABLE
+__attribute__((weak)) const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+    // Left
+    {{4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
+    {{4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
+    {{4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
+    {{2, 7}, {1, 7}, {0, 7}},
+    // Right
+    {{4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
+    {{4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
+    {{4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
+    {{2, 3}, {1, 3}, {0, 3}},
+};
+#endif
 
 // ---------- CUSTOM MACROS ----------------------------------------------------
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
