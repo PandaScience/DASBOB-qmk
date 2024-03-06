@@ -31,6 +31,7 @@ WPM_ENABLE = no             # make words-per-minute available
 MOUSEKEY_ENABLE = yes       # click, scroll etc.
 EXTRAKEY_ENABLE = yes       # audio and system control
 UNICODE_ENABLE = yes        # unicode
+REPEAT_KEY_ENABLE = yes     # repeats last pressed key
 
 # simplify shifting characters (requires disabled COMMAND feature)
 COMMAND_ENABLE = no

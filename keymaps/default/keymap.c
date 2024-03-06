@@ -43,8 +43,22 @@
 enum layers { BSE, SYM, NUM, FUN, NAV, MSE, SYS };
 
 enum custom_keycodes {
+    // symbols
     UPDIR = SAFE_RANGE,
     LXHM,
+    // alternate repeats (magic key)
+    MG_ENT,
+    MG_MENT,
+    MG_ER,
+    MG_ES,
+    MG_UST,
+    MG_ON,
+    MG_ION,
+    MG_OA,
+    MG_SP_BUT,
+    MG_THE,
+    MG_EFORE,
+    MG_HICH,
 };
 
 /* clang-format off */
@@ -66,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [BSE] = LAYOUT_split_3x5_3(
     //,--------------------------------------------.                    ,--------------------------------------------.
-             _V,      _M,      _L,      _C,      _P,                           _B, ___x___,      _U,      _O,      _Q,
+             _V,      _M,      _L,      _C,      _P,                           _B,   _AREP,      _U,      _O,      _Q,
     //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
            HM_S,    HM_T,    HM_R,    HM_D,      _Y,                           _F,    HM_N,    HM_E,    HM_A,    HM_I,
     //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -166,23 +180,71 @@ __attribute__((weak)) const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRI
 };
 #endif
 
-// ---------- CUSTOM MACROS ----------------------------------------------------
+// ---------- CUSTOM KEYCODES, REPEATS, etc. --------------------------------
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_caps_word(keycode, record)) { return false; }
     if (!process_custom_shift_keys(keycode, record)) { return false; }
 
-    /* const uint8_t mods = get_mods(); */
-    /* const uint8_t oneshot_mods = get_oneshot_mods(); */
-    /* const bool shifted = (mods | oneshot_mods) & MOD_MASK_SHIFT; */
-
-    // for more unicode, see https://github.com/getreuer/qmk-keymap/blob/main/keymap.c
     if (record->event.pressed) {
+        /* custom keycodes */
         switch (keycode) {
             case UPDIR:
                 SEND_STRING("../");
                 return false;
             case LXHM:
                 SEND_STRING("~/");
+                return false;
+        }
+
+        /* alternate keys */
+        int rep_count = get_repeat_key_count();
+        uint8_t last_only_shifted = get_last_mods() & ~MOD_MASK_SHIFT;
+        // let AREP and REP send n after alternate repeats (with exceptions)
+        if (rep_count < 0 && keycode <= KC_Z && last_only_shifted == 0) {
+            set_last_keycode(KC_N);
+            set_last_mods(0);
+        }
+
+        switch (keycode) {
+            case MG_ENT:
+                SEND_STRING("ent");
+                return false;
+            case MG_MENT:
+                SEND_STRING("ment");
+                return false;
+            case MG_ER:
+                SEND_STRING("er");
+                return false;
+            case MG_ES:
+                SEND_STRING("es");
+                return false;
+            case MG_UST:
+                if (rep_count < -1) {
+                    SEND_STRING("ment");
+                } else {
+                    SEND_STRING("ust");
+                }
+                return false;
+            case MG_OA:
+                SEND_STRING("oa");
+                return false;
+            case MG_ON:
+                SEND_STRING("on");
+                return false;
+            case MG_ION:
+                SEND_STRING("ion");
+                return false;
+            case MG_SP_BUT:
+                SEND_STRING(" but");
+                return false;
+            case MG_THE:
+                SEND_STRING("the");
+                return false;
+            case MG_EFORE:
+                SEND_STRING("efore");
+                return false;
+            case MG_HICH:
+                SEND_STRING("hich");
                 return false;
         }
     }
@@ -253,3 +315,81 @@ combo_t key_combos[] = {
     // symbols
     COMBO(bsls_combo, KC_BSLS),  // nvim leader
 };
+
+// ---------- (ALTERNATE) REPEATS ----------------------------------------------
+/* https://docs.qmk.fm/#/feature_repeat_key */
+
+// unpack tapping keycodes for tap-hold keys
+//   https://docs.qmk.fm/#/feature_autocorrect?id=process-autocorrect-example
+uint16_t unpack_keycode(uint16_t keycode) {
+    switch (keycode) {
+        // exclude mod tap-holds when held down and mask for base keycode when only tapped
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+            return QK_MOD_TAP_GET_TAP_KEYCODE(keycode);
+        // same for layer tap-holds
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+            return QK_LAYER_TAP_GET_TAP_KEYCODE(keycode);
+    }
+
+    return keycode;
+}
+
+// https://docs.qmk.fm/#/feature_repeat_key?id=ignoring-certain-keys-and-mods
+// bool remember_last_key_user(uint16_t keycode, keyrecord_t *record, uint8_t *remembered_mods) {
+//     // forget Shift on letters when Shift or AltGr are the only mods
+//     //   https://docs.qmk.fm/#/feature_repeat_key?id=filtering-remembered-mods
+//     keycode = unpack_keycode(keycode);
+//     switch (keycode) {
+//         case KC_A ... KC_Z:
+//             if ((*remembered_mods & ~(MOD_MASK_SHIFT | MOD_BIT(KC_RALT))) == 0) {
+//                 *remembered_mods &= ~MOD_MASK_SHIFT;
+//             }
+//             break;
+//     }
+//
+//     return true;
+// }
+
+// use alternate repeat concept from magic strdy
+//   https://github.com/Ikcelaks/keyboard_layouts/blob/main/magic_sturdy/magic_sturdy.md
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    /* clang-format off */
+    keycode = unpack_keycode(keycode);
+    switch (keycode) {
+        // SFBs left and scissors -> alternations
+        case KC_C:
+        case KC_P:
+        case KC_D:
+        case KC_G: return KC_Y;
+        case KC_L:
+        case KC_S: return KC_K;
+        case KC_R: return KC_L;
+        // SFBs right -> inward rolls
+        case KC_K: return KC_S;
+        case KC_Y: return KC_P;
+        case KC_N: return KC_N;
+        case KC_Z: return KC_H;
+        case KC_U: return KC_E;
+        case KC_O: return KC_A;
+        case KC_E: return KC_U;
+        case KC_A: return KC_O;
+        // white space & symbols
+        case KC_SPC:
+        case KC_TAB: return MG_THE;
+        case KC_COMM: return MG_SP_BUT;
+        case KC_MINS: return KC_RABK;
+        // syllables & endings
+        case KC_H: return MG_OA;
+        case KC_I: return MG_ON;
+        case KC_V: return MG_ER;
+        case KC_X: return MG_ES;
+        case KC_M: return MG_ENT;
+        case KC_T: return MG_MENT;
+        case KC_J: return MG_UST;
+        case KC_B: return MG_EFORE;
+        case KC_W: return MG_HICH;
+    }
+
+    return KC_TRNS;
+    /* clang-format on */
+}

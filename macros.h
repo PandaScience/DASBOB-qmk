@@ -37,6 +37,10 @@
 #define _SCLN KC_SCLN
 #define _QUOT KC_QUOT
 
+// NOTE: will not work as tap-hold!
+#define _REP QK_REP
+#define _AREP QK_AREP
+
 #define sl(KC) LSFT_T(KC)
 #define sr(KC) RSFT_T(KC)
 #define cl(KC) LCTL_T(KC)
