@@ -1,27 +1,43 @@
 # dasbob
 
-![alt text](https://github.com/GroooveBob/DASBOB/blob/main/pic/dasbob.png)
+![keyboard image](dasbob.jpg)
+
+---
 
 DASBOB is a 36-key diodeless split with splay and buzzer.
 
-* Keyboard Maintainer: [grooovebob](https://github.com/grooovebob)
-* Hardware Supported: elite c
-* Hardware Availability: https://github.com/GroooveBob/DASBOB
+- Keyboard Maintainer: [grooovebob](https://github.com/grooovebob)
+- Hardware Supported: elite c
+- Hardware Availability: https://github.com/GroooveBob/DASBOB
 
-Make example for this keyboard (after setting up your build environment):
+---
 
-    make dasbob:default
+## PandaScience Adaption
 
-Flashing example for this keyboard:
+### Fixes
 
-    make dasbob:default:flash
+- Cleaned up superfluous configuration in `rules.mk` and `config.h`
+- Fixed relative key positions in `info.json`
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+### Features
 
-## Bootloader
+- [Magic Sturdy alphas](https://github.com/Ikcelaks/keyboard_layouts/blob/main/magic_sturdy/magic_sturdy.md)
+- Symbol, navigation and function layers
+- Combo shortcuts for frequent symbols
+- Home row mods
+- Swap hands key
+- Auto-shift
+- Automated keymap drawing
 
-Enter the bootloader in 3 ways:
+### Keymap
 
-* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
-* **Keycode in layout**: Press the key mapped to `RESET` if it is available
+> [!TIP]
+> Keymap SVG created with [Keymap Drawer](https://github.com/caksoylar/keymap-drawer)
+
+> [!NOTE]
+>
+> - Symbols with existing combos on BSE layer are indicated on SYM layer with a
+>   lighter grey shading
+> - SYS layer is WIP
+
+![keyboard image](./keymap-drawer/keymap.svg)
