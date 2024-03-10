@@ -9,10 +9,35 @@
 #define _______ KC_TRNS
 #endif
 
+// generic layer tap-holds
 #define sym(KC) LT(SYM, KC)
 #define num(KC) LT(NUM, KC)
 #define nav(KC) LT(NAV, KC)
 #define mse(KC) LT(MSE, KC)
+
+// home row mods left
+#define HM_S sym(_S)
+#define HM_T sl(_T)
+#define HM_R gl(_R)
+#define HM_D nav(_D)
+#define HM_X cl(_X)
+#define HM_K al(_K)
+
+// home row mods right
+#define HM_I sym(_I)
+#define HM_A sr(_A)
+#define HM_E gr(_E)
+#define HM_N mse(_N)
+#define HM_SL cr(_SLSH)
+#define HM_DT al(_DOT)
+
+// thumb key tap-holds
+#define TH_X _X
+#define TH_TAB ar(_TAB)
+#define TH_ENT num(_ENT)
+#define TH_SPC swp(_SPC)
+#define TH_BSP ar(_BSPC)
+#define TH_REP _REP
 
 enum layers { BSE, SYM, NUM, FUN, NAV, MSE, SYS };
 
@@ -42,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,--------------------------------------------.                    ,--------------------------------------------.
              _V,      _M,      _L,      _C,      _P,                           _B, ___x___,      _U,      _O,      _Q,
     //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        sym(_S),  sl(_T),  gl(_R), nav(_D),      _Y,                           _F, mse(_N),  gr(_E),  sr(_A), sym(_I),
+           HM_S,    HM_T,    HM_R,    HM_D,      _Y,                           _F,    HM_N,    HM_E,    HM_A,    HM_I,
     //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-         cl(_X),  al(_K),      _J,      _G,      _W,                           _Z,      _H,   _COMM,al(_DOT),cr(_SLSH),
+           HM_X,    HM_K,      _J,      _G,      _W,                           _Z,      _H,   _COMM,   HM_DT,   HM_SL,
     //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                        _X,ar(_TAB),num(_ENT), swp(_SPC),ar(_BSPC), QK_REP
+                                      TH_X,  TH_TAB,  TH_ENT,     TH_SPC,  TH_BSP,  TH_REP
                                //`--------------------------'  `--------------------------'
     ),
 
