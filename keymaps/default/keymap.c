@@ -182,6 +182,17 @@ __attribute__((weak)) const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRI
 
 // ---------- CUSTOM KEYCODES, REPEATS, etc. --------------------------------
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // prevent custom shift for arrow keys when used in combination with GUI
+    if (record->event.pressed && (get_mods() & MOD_MASK_GUI)) {
+        switch (keycode) {
+            case KC_LEFT:
+            case KC_RIGHT:
+            case KC_UP:
+            case KC_DOWN:
+                return true;
+        }
+    }
+
     if (!process_caps_word(keycode, record)) { return false; }
     if (!process_custom_shift_keys(keycode, record)) { return false; }
 
