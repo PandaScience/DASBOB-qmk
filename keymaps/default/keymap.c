@@ -269,7 +269,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // ---------- CUSTOM SHIFT KEYS ------------------------------------------------
 // https://getreuer.info/posts/keyboards/custom-shift-keys/index.html
 const custom_shift_key_t custom_shift_keys[] = {
-    {sym(KC_BSPC), KC_DEL},
+    {TH_BSP, KC_DEL},
     // shifted arrow keys
     {KC_LEFT, KC_HOME},
     {KC_RIGHT, KC_END},
