@@ -283,16 +283,19 @@ parse_config:
     QK_REP: $$mdi:repeat-variant$$
     QK_AREP: $$mdi:star$$
     SH_T(KC_SPC): { t: $$mdi:keyboard-space$$, h: $$mdi:swap-horizontal$$ }
+    HYPR(KC_W): { t: $$mdi:grid$$ }
+
 
   qmk_keycode_map:
     # currently not properly parsable
     #> layer toggles -> enums are not pre-processed by cpp for some reason
+    MO(SYS): { t: $$mdi:cog$$, h: $$mdi:layers$$ }
     MO(FUN): { t: $$mdi:function$$, h: $$mdi:layers$$ }
-    LT(SYM, S): { t: S, h: $$mdi:pound-box$$ }
-    LT(SYM, I): { t: I, h: $$mdi:pound-box$$ }
-    LT(NAV, D): { t: D, h: $$mdi:arrow-all$$ }
-    LT(MSE, N): { t: N, h: $$mdi:mouse$$ }
-    LT(NUM, ENT): { t: $$mdi:keyboard-return$$, h: $$mdi:numeric$$ }
+    LT(SYM,S): { t: S, h: $$mdi:pound-box$$ }
+    LT(SYM,I): { t: I, h: $$mdi:pound-box$$ }
+    LT(NAV,D): { t: D, h: $$mdi:arrow-all$$ }
+    LT(MSE,N): { t: N, h: $$mdi:mouse$$ }
+    LT(NUM,ENT): { t: $$mdi:keyboard-return$$, h: $$mdi:numeric$$ }
 
     # modifiers
     LSFT: { t: $$mdi:apple-keyboard-shift$$, h: $$mdi:gesture-tap-hold$$ }

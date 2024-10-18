@@ -1,4 +1,5 @@
 #!/bin/bash
+
 KEYMAP_C="${PWD}/keymaps/default/keymap.c"
 WORKDIR="${PWD}/keymap-drawer"
 CONFIG="${WORKDIR}/config.yaml"
@@ -42,4 +43,4 @@ keymap -c "${CONFIG}" draw -j ../info.json keymap.yaml > keymap.svg
 # HACK: remove temp files
 rm "${KEYMAP_TMP_C}" || true
 rm keymap_.yaml || true
-rm "${COFNIG}" || true
+rm "${CONFIG}" || true
