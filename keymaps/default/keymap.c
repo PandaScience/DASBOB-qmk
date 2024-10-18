@@ -409,10 +409,10 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     keycode = unpack_keycode(keycode);
     switch (keycode) {
         // SFBs left and scissors -> alternations
-        case KC_C:
+        case KC_C: return KC_D;
         case KC_P:
         case KC_D:
-        case KC_G: return KC_Y;
+        case KC_G: return KC_W;
         case KC_L:
         case KC_S: return KC_K;
         case KC_R: return KC_L;
