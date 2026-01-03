@@ -41,3 +41,21 @@ DASBOB is a 36-key diodeless split with splay and buzzer.
 > - SYS layer is WIP
 
 ![keyboard image](./keymap-drawer/keymap.svg)
+
+## Setup
+
+```
+sudo pacman -S qmk (+ optional deps)
+qmk setup
+sudo cp /path/to/qmk_firmware/util/udev/50-qmk.rules /etc/udev/rules.d/
+qmk config user.keyboard=crkbd/rev1
+qmk config user.keymap=pandascience
+qmk new-keymap
+qmk compile
+
+# for auto-detecting left/right side via EEPROM flash side-specific firmware
+qmk flash -kb dasbob -km default -bl uf2-split-left
+qmk flash -kb dasbob -km default -bl uf2-split-right
+# then for subsequent updates it's sufficient to run
+qmk flash
+```
