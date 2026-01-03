@@ -40,10 +40,25 @@
 #define TH_BSP ar(_BSPC)
 #define TH_REP _REP
 
+// HM on QWERTY layer
+#define HMx_A sym(_A)
+#define HMx_S sl(_S)
+#define HMx_D gl(_D)
+#define HMx_F nav(_F)
+#define HMx_Z cl(_Z)
+#define HMx_X al(_X)
+
+#define HMx_SC sym(_SCLN)
+#define HMx_L sr(_L)
+#define HMx_K gr(_K)
+#define HMx_J mse(_J)
+#define HMx_SL cr(_SLSH)
+#define HMx_DT al(_DOT)
+
 // warp combos
 #define WARP_H HYPR(KC_W)
 
-enum layers { BSE, SYM, NUM, FUN, NAV, MSE, SYS };
+enum layers { BSE, STD, SYM, NUM, FUN, NAV, MSE, SYS };
 
 enum custom_keycodes {
     // symbols
@@ -92,6 +107,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       TH_X,  TH_TAB,  TH_ENT,     TH_SPC,  TH_BSP,  TH_REP
                                //`--------------------------'  `--------------------------'
     ),
+
+    [STD] = LAYOUT_split_3x5_3(
+    //,--------------------------------------------.                    ,--------------------------------------------.
+             _Q,      _W,      _E,      _R,      _T,                           _Y,      _U,      _I,      _O,      _P,
+    //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+          HMx_A,   HMx_S,   HMx_D,   HMx_F,      _G,                           _H,   HMx_J,   HMx_K,   HMx_L,  HMx_SC,
+    //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+          HMx_Z,   HMx_X,      _C,      _V,      _B,                           _N,      _M,   _COMM,  HMx_DT,  HMx_SL,
+    //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+                                      TH_X,  TH_TAB,  TH_ENT,     TH_SPC,  TH_BSP,  TH_REP
+                               //`--------------------------'  `--------------------------'
+    ),
+
 
     [SYM] = LAYOUT_split_3x5_3(
     //,--------------------------------------------.                    ,--------------------------------------------.
@@ -310,6 +338,9 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
 }
 
 // ---------- KEY COMBOS -------------------------------------------------------
+// swap BSE/STD layers
+const uint16_t PROGMEM bse_to_std_combo[] = {_V, _Q, COMBO_END};
+const uint16_t PROGMEM std_to_bse_combo[] = {_Q, _P, COMBO_END};
 // software reboot
 const uint16_t PROGMEM reset_left_combo[] = {_U, _O, _Q, COMBO_END};
 const uint16_t PROGMEM reset_right_combo[] = {_V, _M, _L, COMBO_END};
@@ -339,6 +370,9 @@ const uint16_t PROGMEM sym_coln_combo[] = {HM_A, HM_DT, COMBO_END};
 const uint16_t PROGMEM sym_bsls_combo[] = {HM_I, HM_SL, COMBO_END};
 
 combo_t key_combos[] = {
+    // swap BSE/STD layers
+    COMBO(bse_to_std_combo, PDF(STD)),
+    COMBO(std_to_bse_combo, PDF(BSE)),
     // software reboot
     COMBO(reset_left_combo, QK_BOOT),
     COMBO(reset_right_combo, QK_BOOT),
